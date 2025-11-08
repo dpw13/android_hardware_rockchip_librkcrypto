@@ -1,0 +1,53 @@
+//##############################################################################
+// build librkcrypto
+//##############################################################################
+
+cc_library_shared {
+    name: "librkcrypto",
+    vendor: true,
+
+    cflags: [
+        "-DANDROID_BUILD",
+        "-DUSER_SPACE",
+    ] + [
+        "-Wall",
+        "-Wno-error",
+        "-Wno-enum-conversion",
+        "-Wno-unused-parameter",
+    ] + [
+        "-DMAJOR_IN_SYSMACROS=1",
+        "-D_GNU_SOURCE",
+    ] + ["-DBINARY_PREFIX=\"TEEC\""],
+
+    shared_libs: [
+        "liblog",
+        "libcutils",
+    ],
+
+    header_libs: [
+        "libdrm_headers",
+    ],
+
+    srcs: [
+        "src/rkcrypto_trace.c",
+        "src/rkcrypto_random.c",
+        "src/rkcrypto_otp_key.c",
+        "src/rkcrypto_mem.c",
+        "src/rkcrypto_core.c",
+        "src/rkcrypto_rsa_helper.c",
+        "third_party/optee_client/libteec/src/teec_trace.c",
+        "third_party/optee_client/libteec/src/tee_client_api.c",
+    ],
+
+    export_include_dirs: [
+        "include",
+    ],
+
+    include_dirs: [
+        "third_party/optee_client/libteec/include",
+        "third_party/optee_client/public",
+    ],
+    local_include_dirs: [
+        "include",
+    ],
+}
