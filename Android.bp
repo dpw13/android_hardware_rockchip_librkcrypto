@@ -11,7 +11,6 @@ cc_library_shared {
         "-DUSER_SPACE",
     ] + [
         "-Wall",
-        "-Wno-error",
         "-Wno-enum-conversion",
         "-Wno-unused-parameter",
     ] + [
